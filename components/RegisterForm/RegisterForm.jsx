@@ -87,7 +87,7 @@ function RegisterForm({ data, createLogin, createRegister, register, login, setI
                 position: 'bottom-center'
             });
             localStorage.setItem('@menu-digital:profile', JSON.stringify(register.items))
-            setIsLoggedState(true);
+            router.reload();
         }
     }, [register]);
 
