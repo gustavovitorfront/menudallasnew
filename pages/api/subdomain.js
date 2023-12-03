@@ -4,6 +4,6 @@ export default (req, res) => {
     if (subdomain) {
         res.status(200).json({ subdomain });
     } else {
-        res.status(200).json({ subdomain: null });
+        res.status(200).json({ subdomain: 123 });
     }
 };
