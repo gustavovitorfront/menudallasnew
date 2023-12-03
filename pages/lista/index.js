@@ -16,7 +16,7 @@ function lista() {
     return (
         <>
             <Head>
-                <title>Teste</title>
+                <title>MenuDallas</title>
             </Head>
 
             <Layout isOnlySubdomain>
