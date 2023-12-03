@@ -1,9 +1,9 @@
 export default (req, res) => {
-    const { subdomain } = req.query;
-
+    const subdomain = req.headers.host.split('.')[0];
+    
     if (subdomain) {
         res.status(200).json({ subdomain });
     } else {
-        res.status(200).json({ subdomain: 123 });
+        res.status(200).json({ subdomain: null });
     }
 };

@@ -6,6 +6,17 @@ import { connect } from 'react-redux';
 import { homeActions } from '../../store/actions/home.actions';
 import { isEmpty } from 'lodash';
 
+function getSubdomain() {
+    const host = window.location.host;
+    const parts = host.split('.');
+
+    if (parts.length > 1) {
+        return parts[0];
+    }
+
+    return null;
+}
+
 function Layout({ children, isOnlySubdomain = false, getAll, home }) {
     const [subdomain, setSubdomain] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
@@ -15,22 +26,11 @@ function Layout({ children, isOnlySubdomain = false, getAll, home }) {
     const router = useRouter();
 
     useEffect(() => {
-        async function fetchSubdomain() {
-            try {
-                setIsLoading(true);
-                const response = await axios.get('/api/subdomain');
-                setSubdomain(response.data.subdomain);
-                setIsLoaded(true);
-                setTimeout(() => {
-                    setIsLoading(false);
-                }, 1000);
-            } catch (error) {
-                setIsLoading(false);
-                setIsLoaded(true);
-            }
-        }
-
-        fetchSubdomain();
+        setSubdomain(getSubdomain());
+        setIsLoaded(true);
+        setTimeout(() => {
+            setIsLoading(false);
+        }, 1000);
     }, []);
 
     useEffect(() => {
@@ -51,7 +51,7 @@ function Layout({ children, isOnlySubdomain = false, getAll, home }) {
 
         console.log('home', home)
 
-        if(home.error){
+        if (home.error) {
             window.location.href = 'https://menudallas.com.br'
         }
 
