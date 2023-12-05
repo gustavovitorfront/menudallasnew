@@ -27,7 +27,10 @@ export default function Home({ data, subdomain }) {
 
 export async function getServerSideProps(context) {
   const host = context.req.headers.host;
-  const subdomain = url.parse(`http://${host}`).hostname.split('.')[0];
+  console.log('host', host);
+
+
+  const subdomain = url.parse(`https://${host}`).hostname.split('.')[0];
 
   if (subdomain) {
     try {

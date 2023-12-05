@@ -68,7 +68,7 @@ function Sobre({ data, subdomain }) {
 
 export async function getServerSideProps(context) {
     const host = context.req.headers.host;
-    const subdomain = url.parse(`http://${host}`).hostname.split('.')[0];
+    const subdomain = url.parse(`https://${host}`).hostname.split('.')[0];
   
     if (subdomain != process.env.NEXT_PUBLIC_BASE_URL_DOMAIN) {
         try {
