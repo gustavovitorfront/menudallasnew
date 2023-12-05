@@ -3,6 +3,7 @@ import { HomeStore } from '../components/HomeStore';
 import { HomeEstablishments } from '../components/HomeEstablishments';
 import { isEmpty } from 'lodash';
 import Head from 'next/head';
+import url from 'url';
 
 export default function Home({ data, subdomain }) {
   return (
@@ -25,7 +26,8 @@ export default function Home({ data, subdomain }) {
 }
 
 export async function getServerSideProps(context) {
-  const subdomain = context.req.headers.host.split('.')[0];
+  const host = context.req.headers.host;
+  const subdomain = url.parse(`http://${host}`).hostname.split('.')[0];
 
   if (subdomain) {
     try {

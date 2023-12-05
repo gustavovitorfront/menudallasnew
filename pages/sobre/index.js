@@ -6,6 +6,7 @@ import { Box, Container, Flex, ListItem, Text, UnorderedList } from '@chakra-ui/
 import { BsClockFill } from 'react-icons/bs'
 import { MdAttachMoney, MdPercent } from 'react-icons/md'
 import { FormasPgBox } from '../../components/FormasPgBox'
+import url from 'url';
 
 function Sobre({ data, subdomain }) {
     return (
@@ -66,8 +67,9 @@ function Sobre({ data, subdomain }) {
 }
 
 export async function getServerSideProps(context) {
-    const subdomain = context.req.headers.host.split('.')[0];
-
+    const host = context.req.headers.host;
+    const subdomain = url.parse(`http://${host}`).hostname.split('.')[0];
+  
     if (subdomain != process.env.NEXT_PUBLIC_BASE_URL_DOMAIN) {
         try {
             const response = await fetch(`https://api.edenerp.com.br:8081/home?empresa=${subdomain}`);
