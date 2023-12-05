@@ -37,10 +37,7 @@ export async function getServerSideProps(context) {
   const host = context.req.headers['x-forwarded-host'] || context.req.headers.host;
   const subdomain = url.parse(`https://${host}`).hostname.split('.')[0];
 
-  console.log(subdomain);
-  console.log(process.env.NEXT_PUBLIC_BASE_URL_DOMAIN);
-
-  if (subdomain != process.env.NEXT_PUBLIC_BASE_URL_DOMAIN) {
+  if (subdomain != process.env.NEXT_PUBLIC_BASE_URL_NAME_BASE_DOMAIN) {
     try {
       const response = await fetch(`https://api.edenerp.com.br:8081/home?empresa=${subdomain}`);
       const data = await response.json();
@@ -59,5 +56,12 @@ export async function getServerSideProps(context) {
         },
       };
     }
+  } else {
+    return {
+      props: {
+        data: {},
+        subdomain: ''
+      },
+    };
   }
 }
