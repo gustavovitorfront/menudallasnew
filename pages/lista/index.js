@@ -9,6 +9,7 @@ import { MainProducts } from '../../components/MainProducts'
 import { ProductsList } from '../../components/ProductsList'
 import { FooterStore } from '../../components/FooterStore'
 import { Box } from '@chakra-ui/react'
+import url from 'url';
 
 function lista({ data, subdomain }) {
     const [refreshSearch, setRefreshSearch] = useState(true);
@@ -18,6 +19,14 @@ function lista({ data, subdomain }) {
             <Head>
                 <title>{data?.nome}</title>
                 <link rel="shortcut icon" href={data?.logo_home} />
+                <meta property="og:title" content={data?.nome} />
+                <meta property="og:description" content={data?.frase_home || data?.nome} />
+                <meta property="og:image" content={data?.logo_home} />
+                <meta name="description" content={data?.frase_home || data?.nome} />
+                <meta name="twitter:title" content={data?.nome} />
+                <meta name="twitter:description" content={data?.frase_home || data?.nome} />
+                <meta name="twitter:image" content={data?.logo_home} />
+                <meta name="twitter:card" content="summary_large_image" />
             </Head>
 
             <Navbar isHome={false} hasSearch={true} setRefreshSearch={setRefreshSearch} />
@@ -35,7 +44,8 @@ function lista({ data, subdomain }) {
 }
 
 export async function getServerSideProps(context) {
-    const subdomain = context.req.headers.host.split('.')[0];
+    const host = context.req.headers['x-forwarded-host'] || context.req.headers.host;
+    const subdomain = url.parse(`https://${host}`).hostname.split('.')[0];
 
     if (subdomain != process.env.NEXT_PUBLIC_BASE_URL_DOMAIN) {
         try {

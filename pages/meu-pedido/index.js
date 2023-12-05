@@ -2,6 +2,7 @@ import React from 'react'
 
 import Head from 'next/head'
 import { OrderContext } from '../../components/OrderContext'
+import url from 'url';
 
 function meuPedido({ data, subdomain }) {
     return (
@@ -9,6 +10,14 @@ function meuPedido({ data, subdomain }) {
             <Head>
                 <title>Meu Pedido</title>
                 <link rel="shortcut icon" href={data?.logo_home} />
+                <meta property="og:title" content={data?.nome} />
+                <meta property="og:description" content={data?.frase_home || data?.nome} />
+                <meta property="og:image" content={data?.logo_home} />
+                <meta name="description" content={data?.frase_home || data?.nome} />
+                <meta name="twitter:title" content={data?.nome} />
+                <meta name="twitter:description" content={data?.frase_home || data?.nome} />
+                <meta name="twitter:image" content={data?.logo_home} />
+                <meta name="twitter:card" content="summary_large_image" />
             </Head>
 
             <OrderContext data={data} subdomain={subdomain} />
@@ -17,7 +26,8 @@ function meuPedido({ data, subdomain }) {
 }
 
 export async function getServerSideProps(context) {
-    const subdomain = context.req.headers.host.split('.')[0];
+    const host = context.req.headers['x-forwarded-host'] || context.req.headers.host;
+    const subdomain = url.parse(`https://${host}`).hostname.split('.')[0];
 
     if (subdomain != process.env.NEXT_PUBLIC_BASE_URL_DOMAIN) {
         try {

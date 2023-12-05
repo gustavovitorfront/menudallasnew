@@ -11,6 +11,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { userActions } from '../../store/actions';
 import { isEmpty } from 'lodash';
+import url from 'url';
 
 const AddressSchema = Yup.object().shape({
     cep: Yup.string()
@@ -95,6 +96,14 @@ function Endereco({ data, user, view, update }) {
             <Head>
                 <title>Endereço</title>
                 <link rel="shortcut icon" href={data?.logo_home} />
+                <meta property="og:title" content={data?.nome} />
+                <meta property="og:description" content={data?.frase_home || data?.nome} />
+                <meta property="og:image" content={data?.logo_home} />
+                <meta name="description" content={data?.frase_home || data?.nome} />
+                <meta name="twitter:title" content={data?.nome} />
+                <meta name="twitter:description" content={data?.frase_home || data?.nome} />
+                <meta name="twitter:image" content={data?.logo_home} />
+                <meta name="twitter:card" content="summary_large_image" />
             </Head>
 
             <NavbarOrder text='Endereço' data={data} linkBack='/perfil' />
@@ -228,7 +237,8 @@ function Endereco({ data, user, view, update }) {
 }
 
 export async function getServerSideProps(context) {
-    const subdomain = context.req.headers.host.split('.')[0];
+    const host = context.req.headers['x-forwarded-host'] || context.req.headers.host;
+    const subdomain = url.parse(`https://${host}`).hostname.split('.')[0];
 
     if (subdomain != process.env.NEXT_PUBLIC_BASE_URL_DOMAIN) {
         try {

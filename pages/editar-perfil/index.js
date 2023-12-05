@@ -7,7 +7,7 @@ import { Box, Button, Card, CardBody, Container, Flex, useToast } from '@chakra-
 import { FastField, Field, Form, Formik } from 'formik';
 import FormField from '../../components/FormField/FormField';
 import * as Yup from 'yup';
-import axios from 'axios';
+import url from 'url';
 import { connect } from 'react-redux';
 import { userActions } from '../../store/actions';
 import { isEmpty } from 'lodash';
@@ -71,6 +71,14 @@ function EditarPerfil({ data, user, view, update }) {
             <Head>
                 <title>Editar perfil</title>
                 <link rel="shortcut icon" href={data?.logo_home} />
+                <meta property="og:title" content={data?.nome} />
+                <meta property="og:description" content={data?.frase_home || data?.nome} />
+                <meta property="og:image" content={data?.logo_home} />
+                <meta name="description" content={data?.frase_home || data?.nome} />
+                <meta name="twitter:title" content={data?.nome} />
+                <meta name="twitter:description" content={data?.frase_home || data?.nome} />
+                <meta name="twitter:image" content={data?.logo_home} />
+                <meta name="twitter:card" content="summary_large_image" />
             </Head>
 
             <NavbarOrder text='Editar perfil' data={data} linkBack='/perfil' />
@@ -163,7 +171,8 @@ function EditarPerfil({ data, user, view, update }) {
 }
 
 export async function getServerSideProps(context) {
-    const subdomain = context.req.headers.host.split('.')[0];
+    const host = context.req.headers['x-forwarded-host'] || context.req.headers.host;
+    const subdomain = url.parse(`https://${host}`).hostname.split('.')[0];
 
     if (subdomain != process.env.NEXT_PUBLIC_BASE_URL_DOMAIN) {
         try {

@@ -14,6 +14,14 @@ function Sobre({ data, subdomain }) {
             <Head>
                 <title>Sobre a loja</title>
                 <link rel="shortcut icon" href={data?.logo_home} />
+                <meta property="og:title" content={data?.nome} />
+                <meta property="og:description" content={data?.frase_home || data?.nome} />
+                <meta property="og:image" content={data?.logo_home} />
+                <meta name="description" content={data?.frase_home || data?.nome} />
+                <meta name="twitter:title" content={data?.nome} />
+                <meta name="twitter:description" content={data?.frase_home || data?.nome} />
+                <meta name="twitter:image" content={data?.logo_home} />
+                <meta name="twitter:card" content="summary_large_image" />
             </Head>
 
             <NavbarOrder text='Sobre a loja' data={data} />
@@ -67,9 +75,9 @@ function Sobre({ data, subdomain }) {
 }
 
 export async function getServerSideProps(context) {
-    const host = context.req.headers.host;
+    const host = context.req.headers['x-forwarded-host'] || context.req.headers.host;
     const subdomain = url.parse(`https://${host}`).hostname.split('.')[0];
-  
+
     if (subdomain != process.env.NEXT_PUBLIC_BASE_URL_DOMAIN) {
         try {
             const response = await fetch(`https://api.edenerp.com.br:8081/home?empresa=${subdomain}`);
