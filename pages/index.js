@@ -26,7 +26,7 @@ export default function Home({ data, subdomain }) {
 }
 
 export async function getServerSideProps(context) {
-  const host = context.req.headers.host;
+  const host = context.req.headers['x-forwarded-host'] || context.req.headers.host;
   console.log('host', host);
 
 
