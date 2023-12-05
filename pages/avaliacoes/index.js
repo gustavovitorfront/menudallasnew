@@ -12,7 +12,7 @@ function Avaliacoes({ data, subdomain }) {
     setLoading(false);
   }, [data, subdomain]);
 
-  return !loading && (
+  return (
     <>
       <Head>
         <title>Histórico de Avaliações</title>
@@ -27,11 +27,15 @@ function Avaliacoes({ data, subdomain }) {
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
 
-      <NavbarOrder text='Histórico de Avaliações' data={data} linkBack='/lista' />
+      {!loading && (
+        <>
+          <NavbarOrder text='Histórico de Avaliações' data={data} linkBack='/lista' />
 
-      <Container maxW='100%' centerContent mt={['105px', '100px']} mb='30px'>
-        <AvaliacoesContainer data={data} subdomain={subdomain} />
-      </Container>
+          <Container maxW='100%' centerContent mt={['105px', '100px']} mb='30px'>
+            <AvaliacoesContainer data={data} subdomain={subdomain} />
+          </Container>
+        </>
+      )}
     </>
   )
 }

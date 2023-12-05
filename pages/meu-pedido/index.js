@@ -11,7 +11,7 @@ function meuPedido({ data, subdomain }) {
         setLoading(false);
     }, [data, subdomain]);
 
-    return !loading && (
+    return (
         <>
             <Head>
                 <title>Meu Pedido</title>
@@ -26,7 +26,7 @@ function meuPedido({ data, subdomain }) {
                 <meta name="twitter:card" content="summary_large_image" />
             </Head>
 
-            <OrderContext data={data} subdomain={subdomain} />
+            {!loading && <OrderContext data={data} subdomain={subdomain} />}
         </>
     )
 }

@@ -96,7 +96,7 @@ function Endereco({ data, subdomain, user, view, update }) {
         setShowMsg(true)
     }
 
-    return !loading && (
+    return (
         <>
             <Head>
                 <title>Endereço</title>
@@ -111,132 +111,135 @@ function Endereco({ data, subdomain, user, view, update }) {
                 <meta name="twitter:card" content="summary_large_image" />
             </Head>
 
-            <NavbarOrder text='Endereço' data={data} linkBack='/perfil' />
+            {!loading && (
+                <>
+                    <NavbarOrder text='Endereço' data={data} linkBack='/perfil' />
+                    <Container maxW='100%' centerContent mt={['105px', '100px']} mb='30px'>
+                        <Card w='100%'>
+                            <CardBody>
+                                <Formik
+                                    enableReinitialize
+                                    initialErrors={{}}
+                                    initialValues={initialValues}
+                                    onSubmit={(values) => handleSubmitSave(values)}
+                                    validationSchema={AddressSchema}
+                                >
+                                    {({ errors, setFieldValue }) => (
+                                        <Form>
+                                            <FastField
+                                                id='cep'
+                                                name='cep'
+                                                placeholder='CEP'
+                                                component={FormField.InputMask}
+                                                mask='99999-999'
+                                                onChange={(event) =>
+                                                    handleCEPChange(event, setFieldValue)
+                                                }
+                                                required
+                                            />
 
-            <Container maxW='100%' centerContent mt={['105px', '100px']} mb='30px'>
-                <Card w='100%'>
-                    <CardBody>
-                        <Formik
-                            enableReinitialize
-                            initialErrors={{}}
-                            initialValues={initialValues}
-                            onSubmit={(values) => handleSubmitSave(values)}
-                            validationSchema={AddressSchema}
-                        >
-                            {({ errors, setFieldValue }) => (
-                                <Form>
-                                    <FastField
-                                        id='cep'
-                                        name='cep'
-                                        placeholder='CEP'
-                                        component={FormField.InputMask}
-                                        mask='99999-999'
-                                        onChange={(event) =>
-                                            handleCEPChange(event, setFieldValue)
-                                        }
-                                        required
-                                    />
-
-                                    <Field
-                                        id='endereco'
-                                        name='endereco'
-                                        placeholder='Endereço'
-                                        component={FormField}
-                                        required
-                                    />
-
-                                    <Flex gap={2} mt={2}>
-                                        <Box w='40%'>
                                             <Field
-                                                id='numero'
-                                                name='numero'
-                                                type='number'
-                                                placeholder='Número'
+                                                id='endereco'
+                                                name='endereco'
+                                                placeholder='Endereço'
                                                 component={FormField}
                                                 required
                                             />
-                                        </Box>
 
-                                        <Field
-                                            id='complemento'
-                                            name='complemento'
-                                            placeholder='Complemento'
-                                            component={FormField}
-                                        />
-                                    </Flex>
+                                            <Flex gap={2} mt={2}>
+                                                <Box w='40%'>
+                                                    <Field
+                                                        id='numero'
+                                                        name='numero'
+                                                        type='number'
+                                                        placeholder='Número'
+                                                        component={FormField}
+                                                        required
+                                                    />
+                                                </Box>
 
-                                    <Field
-                                        id='bairro'
-                                        name='bairro'
-                                        placeholder='Bairro'
-                                        component={FormField}
-                                        required
-                                    />
+                                                <Field
+                                                    id='complemento'
+                                                    name='complemento'
+                                                    placeholder='Complemento'
+                                                    component={FormField}
+                                                />
+                                            </Flex>
 
-                                    <Flex gap={2} mt={2}>
-                                        <Field
-                                            id='cidade'
-                                            name='cidade'
-                                            placeholder='Cidade'
-                                            component={FormField}
-                                            required
-                                        />
-
-                                        <Box w='58%'>
-                                            <FastField
-                                                id='estado'
-                                                name='estado'
-                                                placeholder='Estado'
-                                                component={FormField.Select}
+                                            <Field
+                                                id='bairro'
+                                                name='bairro'
+                                                placeholder='Bairro'
+                                                component={FormField}
                                                 required
-                                            >
-                                                <option value='AC'>AC</option>
-                                                <option value='AL'>AL</option>
-                                                <option value='AM'>AM</option>
-                                                <option value='AP'>AP</option>
-                                                <option value='BA'>BA</option>
-                                                <option value='CE'>CE</option>
-                                                <option value='DF'>DF</option>
-                                                <option value='GO'>GO</option>
-                                                <option value='ES'>ES</option>
-                                                <option value='MA'>MA</option>
-                                                <option value='MG'>MG</option>
-                                                <option value='MS'>MS</option>
-                                                <option value='MT'>MT</option>
-                                                <option value='PA'>PA</option>
-                                                <option value='PB'>PB</option>
-                                                <option value='PE'>PE</option>
-                                                <option value='PI'>PI</option>
-                                                <option value='PR'>PR</option>
-                                                <option value='RJ'>RJ</option>
-                                                <option value='RN'>RN</option>
-                                                <option value='RO'>RO</option>
-                                                <option value='RR'>RR</option>
-                                                <option value='RS'>RS</option>
-                                                <option value='SC'>SC</option>
-                                                <option value='SE'>SE</option>
-                                                <option value='SP'>SP</option>
-                                                <option value='TO'>TO</option>
-                                            </FastField>
-                                        </Box>
-                                    </Flex>
+                                            />
 
-                                    <Button
-                                        w='100%'
-                                        color='white'
-                                        variant='btnDallas'
-                                        type='submit'
-                                        isDisabled={Object.keys(errors).length > 0}
-                                        isLoading={isLoading}
-                                    >
-                                        Salvar
-                                    </Button>
-                                </Form>
-                            )}
-                        </Formik>
-                    </CardBody>
-                </Card>
-            </Container>
+                                            <Flex gap={2} mt={2}>
+                                                <Field
+                                                    id='cidade'
+                                                    name='cidade'
+                                                    placeholder='Cidade'
+                                                    component={FormField}
+                                                    required
+                                                />
+
+                                                <Box w='58%'>
+                                                    <FastField
+                                                        id='estado'
+                                                        name='estado'
+                                                        placeholder='Estado'
+                                                        component={FormField.Select}
+                                                        required
+                                                    >
+                                                        <option value='AC'>AC</option>
+                                                        <option value='AL'>AL</option>
+                                                        <option value='AM'>AM</option>
+                                                        <option value='AP'>AP</option>
+                                                        <option value='BA'>BA</option>
+                                                        <option value='CE'>CE</option>
+                                                        <option value='DF'>DF</option>
+                                                        <option value='GO'>GO</option>
+                                                        <option value='ES'>ES</option>
+                                                        <option value='MA'>MA</option>
+                                                        <option value='MG'>MG</option>
+                                                        <option value='MS'>MS</option>
+                                                        <option value='MT'>MT</option>
+                                                        <option value='PA'>PA</option>
+                                                        <option value='PB'>PB</option>
+                                                        <option value='PE'>PE</option>
+                                                        <option value='PI'>PI</option>
+                                                        <option value='PR'>PR</option>
+                                                        <option value='RJ'>RJ</option>
+                                                        <option value='RN'>RN</option>
+                                                        <option value='RO'>RO</option>
+                                                        <option value='RR'>RR</option>
+                                                        <option value='RS'>RS</option>
+                                                        <option value='SC'>SC</option>
+                                                        <option value='SE'>SE</option>
+                                                        <option value='SP'>SP</option>
+                                                        <option value='TO'>TO</option>
+                                                    </FastField>
+                                                </Box>
+                                            </Flex>
+
+                                            <Button
+                                                w='100%'
+                                                color='white'
+                                                variant='btnDallas'
+                                                type='submit'
+                                                isDisabled={Object.keys(errors).length > 0}
+                                                isLoading={isLoading}
+                                            >
+                                                Salvar
+                                            </Button>
+                                        </Form>
+                                    )}
+                                </Formik>
+                            </CardBody>
+                        </Card>
+                    </Container>
+                </>
+            )}
         </>
     )
 }

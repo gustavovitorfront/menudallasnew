@@ -71,7 +71,7 @@ function EditarPerfil({ data, subdomain, user, view, update }) {
         setShowMsg(true)
     }
 
-    return !loading && (
+    return (
         <>
             <Head>
                 <title>Editar perfil</title>
@@ -86,91 +86,95 @@ function EditarPerfil({ data, subdomain, user, view, update }) {
                 <meta name="twitter:card" content="summary_large_image" />
             </Head>
 
-            <NavbarOrder text='Editar perfil' data={data} linkBack='/perfil' />
+            {!loading && (
+                <>
+                    <NavbarOrder text='Editar perfil' data={data} linkBack='/perfil' />
 
-            <Container maxW='100%' centerContent mt={['105px', '100px']} mb='30px'>
-                <Card w='100%'>
-                    <CardBody>
-                        <Formik
-                            enableReinitialize
-                            initialErrors={{}}
-                            initialValues={initialValues}
-                            onSubmit={(values) => handleSubmitSave(values)}
-                            validationSchema={AccountSchema}
-                        >
-                            {({ errors, setFieldValue }) => (
-                                <Form>
-                                    <Field
-                                        id='nome'
-                                        name='nome'
-                                        type='text'
-                                        placeholder='Nome'
-                                        component={FormField}
-                                        error={errors.nome}
-                                        required
-                                    />
+                    <Container maxW='100%' centerContent mt={['105px', '100px']} mb='30px'>
+                        <Card w='100%'>
+                            <CardBody>
+                                <Formik
+                                    enableReinitialize
+                                    initialErrors={{}}
+                                    initialValues={initialValues}
+                                    onSubmit={(values) => handleSubmitSave(values)}
+                                    validationSchema={AccountSchema}
+                                >
+                                    {({ errors, setFieldValue }) => (
+                                        <Form>
+                                            <Field
+                                                id='nome'
+                                                name='nome'
+                                                type='text'
+                                                placeholder='Nome'
+                                                component={FormField}
+                                                error={errors.nome}
+                                                required
+                                            />
 
-                                    <FastField
-                                        id={'cpf'}
-                                        name={'cpf'}
-                                        placeholder={'CPF'}
-                                        component={FormField.InputMask}
-                                        mask={'999.999.999-99'}
-                                    />
+                                            <FastField
+                                                id={'cpf'}
+                                                name={'cpf'}
+                                                placeholder={'CPF'}
+                                                component={FormField.InputMask}
+                                                mask={'999.999.999-99'}
+                                            />
 
-                                    <FastField
-                                        id={'celular'}
-                                        name={'celular'}
-                                        placeholder={'Celular'}
-                                        component={FormField.InputMask}
-                                        mask={'(99) 99999-9999'}
-                                        required
-                                    />
+                                            <FastField
+                                                id={'celular'}
+                                                name={'celular'}
+                                                placeholder={'Celular'}
+                                                component={FormField.InputMask}
+                                                mask={'(99) 99999-9999'}
+                                                required
+                                            />
 
-                                    <Field
-                                        id='email'
-                                        name='email'
-                                        type='email'
-                                        placeholder='Email'
-                                        component={FormField}
-                                        error={errors.email}
-                                        required
-                                    />
+                                            <Field
+                                                id='email'
+                                                name='email'
+                                                type='email'
+                                                placeholder='Email'
+                                                component={FormField}
+                                                error={errors.email}
+                                                required
+                                            />
 
-                                    <Field
-                                        id='password'
-                                        name='password'
-                                        type='password'
-                                        placeholder='Senha'
-                                        component={FormField}
-                                        error={errors.email}
-                                    />
+                                            <Field
+                                                id='password'
+                                                name='password'
+                                                type='password'
+                                                placeholder='Senha'
+                                                component={FormField}
+                                                error={errors.email}
+                                            />
 
-                                    <Field
-                                        id='password_confirmation'
-                                        name='password_confirmation'
-                                        type='password'
-                                        placeholder='Confirmar Senha'
-                                        component={FormField}
-                                        error={errors.email}
-                                    />
+                                            <Field
+                                                id='password_confirmation'
+                                                name='password_confirmation'
+                                                type='password'
+                                                placeholder='Confirmar Senha'
+                                                component={FormField}
+                                                error={errors.email}
+                                            />
 
-                                    <Button
-                                        w='100%'
-                                        color='white'
-                                        variant='btnDallas'
-                                        type='submit'
-                                        isDisabled={Object.keys(errors).length > 0}
-                                        isLoading={isLoading}
-                                    >
-                                        Salvar
-                                    </Button>
-                                </Form>
-                            )}
-                        </Formik>
-                    </CardBody>
-                </Card>
-            </Container>
+                                            <Button
+                                                w='100%'
+                                                color='white'
+                                                variant='btnDallas'
+                                                type='submit'
+                                                isDisabled={Object.keys(errors).length > 0}
+                                                isLoading={isLoading}
+                                            >
+                                                Salvar
+                                            </Button>
+                                        </Form>
+                                    )}
+                                </Formik>
+                            </CardBody>
+                        </Card>
+                    </Container>
+                </>
+            )}
         </>
     )
 }

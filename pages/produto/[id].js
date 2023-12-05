@@ -10,7 +10,7 @@ function Produto({ data, subdomain }) {
         setLoading(false);
     }, [data, subdomain]);
 
-    return !loading && (
+    return (
         <>
             <Head>
                 <title>Ver produto</title>
@@ -25,7 +25,7 @@ function Produto({ data, subdomain }) {
                 <meta name="twitter:card" content="summary_large_image" />
             </Head>
 
-            <ProductContainer data={data} subdomain={subdomain} />
+            {!loading && <ProductContainer data={data} subdomain={subdomain} />}
         </>
     )
 }

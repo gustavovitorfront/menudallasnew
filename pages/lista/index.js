@@ -19,7 +19,7 @@ function lista({ data, subdomain }) {
         setLoading(false);
     }, [data, subdomain]);
 
-    return !loading && (
+    return (
         <>
             <Head>
                 <title>{data?.nome}</title>
@@ -34,16 +34,20 @@ function lista({ data, subdomain }) {
                 <meta name="twitter:card" content="summary_large_image" />
             </Head>
 
-            <Navbar isHome={false} hasSearch={true} setRefreshSearch={setRefreshSearch} />
+            {!loading && (
+                <>
+                    <Navbar isHome={false} hasSearch={true} setRefreshSearch={setRefreshSearch} />
 
-            <Box id='header'>
-                <HeaderHomeStore data={data} />
-                <InfoStoreHome type={2} data={data} subdomain={subdomain} />
-                <MenuOptionsStore data={data} subdomain={subdomain} />
-            </Box>
-            <MainProducts data={data} subdomain={subdomain} refreshSearch={refreshSearch} setRefreshSearch={setRefreshSearch} />
-            <ProductsList data={data} />
-            <FooterStore data={data} subdomain={subdomain} />
+                    <Box id='header'>
+                        <HeaderHomeStore data={data} />
+                        <InfoStoreHome type={2} data={data} subdomain={subdomain} />
+                        <MenuOptionsStore data={data} subdomain={subdomain} />
+                    </Box>
+                    <MainProducts data={data} subdomain={subdomain} refreshSearch={refreshSearch} setRefreshSearch={setRefreshSearch} />
+                    <ProductsList data={data} />
+                    <FooterStore data={data} subdomain={subdomain} />
+                </>
+            )}
         </>
     )
 }

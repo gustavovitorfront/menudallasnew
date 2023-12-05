@@ -13,7 +13,7 @@ function Pedidos({ data, subdomain }) {
     useEffect(() => {
         setLoading(false);
     }, [data, subdomain]);
-    
+
     const router = useRouter();
 
     useEffect(() => {
@@ -22,7 +22,7 @@ function Pedidos({ data, subdomain }) {
         }
     }, [isLogged]);
 
-    return !loading && (
+    return (
         <>
             <Head>
                 <title>Pedidos</title>
@@ -37,11 +37,15 @@ function Pedidos({ data, subdomain }) {
                 <meta name="twitter:card" content="summary_large_image" />
             </Head>
 
-            <NavbarOrder text='Pedidos' data={data} linkBack='/perfil' />
+            {!loading && (
+                <>
+                    <NavbarOrder text='Pedidos' data={data} linkBack='/perfil' />
 
-            <Container maxW='100%' centerContent mt={['105px', '100px']} mb='30px'>
-                <PedidoContext data={data} subdomain={subdomain} />
-            </Container>
+                    <Container maxW='100%' centerContent mt={['105px', '100px']} mb='30px'>
+                        <PedidoContext data={data} subdomain={subdomain} />
+                    </Container>
+                </>
+            )}
         </>
     )
 }

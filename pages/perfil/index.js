@@ -27,7 +27,7 @@ function Perfil({ data, subdomain }) {
         }
     }, [isLogged, userDataLogged]);
 
-    return !loading && (
+    return (
         <>
             <Head>
                 <title>Perfil</title>
@@ -42,11 +42,16 @@ function Perfil({ data, subdomain }) {
                 <meta name="twitter:card" content="summary_large_image" />
             </Head>
 
-            <NavbarOrder text='Perfil' data={data} />
+            {!loading && (
+                <>
+                    <NavbarOrder text='Perfil' data={data} />
 
-            <Container maxW='100%' centerContent mt={['105px', '100px']} mb='30px'>
-                {!isLoggedState ? <RegisterForm data={data} setIsLoggedState={setIsLoggedState} /> : <ProfileContent data={data} user={user} setIsLoggedState={setIsLoggedState} />}
-            </Container>
+                    <Container maxW='100%' centerContent mt={['105px', '100px']} mb='30px'>
+                        {!isLoggedState ? <RegisterForm data={data} setIsLoggedState={setIsLoggedState} /> : <ProfileContent data={data} user={user} setIsLoggedState={setIsLoggedState} />}
+                    </Container>
+                </>
+            )}
+
         </>
     )
 }
