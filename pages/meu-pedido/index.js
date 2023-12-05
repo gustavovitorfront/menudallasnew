@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Head from 'next/head'
 import { OrderContext } from '../../components/OrderContext'
 import url from 'url';
 
 function meuPedido({ data, subdomain }) {
-    return (
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setLoading(false);
+    }, [data, subdomain]);
+
+    return !loading && (
         <>
             <Head>
                 <title>Meu Pedido</title>

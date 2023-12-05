@@ -456,27 +456,18 @@ function InfoProduct({ subdomain, data, productData, sabores, getAll }) {
 
                                                             <Box className="saboresList">
                                                                 {flavorsFilters.map((sab, index) => (
-                                                                    <Flex justifyContent='space-between' alignItems='center' key={index} p='10px' pl={0} pr={0} borderBottom={flavorsFilters.length === index + 1 ? '' : '1px solid #CECECE'}>
-                                                                        <Text fontSize='13px' fontWeight={600}>{sab?.descricao}</Text>
-                                                                        <Flex alignItems='center' gap='20px'>
-                                                                            <Text as='strong' fontSize='14px'>{moneyFormat.format(sab?.valor)}</Text>
-                                                                            <Checkbox
-                                                                                size='lg'
-                                                                                color={data.primary_color != undefined ? data.primary_color : '#1e90ff'}
-                                                                                isChecked={flavorsSelected.filter((filter) => filter.id_sabor == sab.id_sabor).length > 0 ? true : false}
-                                                                                onChange={(e) => {
-                                                                                    let dt = flavorsSelected
-                                                                                    if (lengthObject.qtd_sabor === 0) {
-                                                                                        if (flavorsSelected.find((filter) => filter === sab) !== undefined) {
-                                                                                            if (sab.descricao !== dt.descricao) {
-                                                                                                let ind = dt.indexOf(sab)
-                                                                                                dt.splice(ind, 1)
-                                                                                            }
-                                                                                        } else {
-                                                                                            dt.push(sab)
-                                                                                        }
-                                                                                    } else {
-                                                                                        if (dt.length < lengthObject.qtd_sabor) {
+                                                                    <Box borderBottom={flavorsFilters.length === index + 1 ? '' : '1px solid #CECECE'}>
+                                                                        <Flex justifyContent='space-between' alignItems='center' key={index} p='10px' pl={0} pr={0}>
+                                                                            <Text fontSize='13px' fontWeight={600}>{sab?.descricao}</Text>
+                                                                            <Flex alignItems='center' gap='20px'>
+                                                                                <Text as='strong' fontSize='14px'>{moneyFormat.format(sab?.valor)}</Text>
+                                                                                <Checkbox
+                                                                                    size='lg'
+                                                                                    color={data.primary_color != undefined ? data.primary_color : '#1e90ff'}
+                                                                                    isChecked={flavorsSelected.filter((filter) => filter.id_sabor == sab.id_sabor).length > 0 ? true : false}
+                                                                                    onChange={(e) => {
+                                                                                        let dt = flavorsSelected
+                                                                                        if (lengthObject.qtd_sabor === 0) {
                                                                                             if (flavorsSelected.find((filter) => filter === sab) !== undefined) {
                                                                                                 if (sab.descricao !== dt.descricao) {
                                                                                                     let ind = dt.indexOf(sab)
@@ -486,30 +477,75 @@ function InfoProduct({ subdomain, data, productData, sabores, getAll }) {
                                                                                                 dt.push(sab)
                                                                                             }
                                                                                         } else {
-                                                                                            if (e.target.checked != undefined)
-                                                                                                toast({
-                                                                                                    title: 'Alerta',
-                                                                                                    description: `Selecione até ${lengthObject.qtd_sabor} opç${lengthObject.qtd_sabor > 1 ? "ões" : "ão"}`,
-                                                                                                    status: 'warning',
-                                                                                                    duration: 2000,
-                                                                                                    isClosable: true,
-                                                                                                    position: 'top-center'
-                                                                                                });
-                                                                                            if (flavorsSelected.find((filter) => filter === sab) !== undefined) {
-                                                                                                if (sab.descricao !== dt.descricao) {
-                                                                                                    let ind = dt.indexOf(sab)
-                                                                                                    dt.splice(ind, 1)
+                                                                                            if (dt.length < lengthObject.qtd_sabor) {
+                                                                                                if (flavorsSelected.find((filter) => filter === sab) !== undefined) {
+                                                                                                    if (sab.descricao !== dt.descricao) {
+                                                                                                        let ind = dt.indexOf(sab)
+                                                                                                        dt.splice(ind, 1)
+                                                                                                    }
+                                                                                                } else {
+                                                                                                    dt.push(sab)
+                                                                                                }
+                                                                                            } else {
+                                                                                                if (e.target.checked != undefined)
+                                                                                                    toast({
+                                                                                                        title: 'Alerta',
+                                                                                                        description: `Selecione até ${lengthObject.qtd_sabor} opç${lengthObject.qtd_sabor > 1 ? "ões" : "ão"}`,
+                                                                                                        status: 'warning',
+                                                                                                        duration: 2000,
+                                                                                                        isClosable: true,
+                                                                                                        position: 'top-center'
+                                                                                                    });
+                                                                                                if (flavorsSelected.find((filter) => filter === sab) !== undefined) {
+                                                                                                    if (sab.descricao !== dt.descricao) {
+                                                                                                        let ind = dt.indexOf(sab)
+                                                                                                        dt.splice(ind, 1)
+                                                                                                    }
                                                                                                 }
                                                                                             }
                                                                                         }
-                                                                                    }
 
-                                                                                    setFlavorsSelected([...dt])
-                                                                                }}
-                                                                            >
-                                                                            </Checkbox>
+                                                                                        setFlavorsSelected([...dt])
+                                                                                    }}
+                                                                                >
+                                                                                </Checkbox>
+                                                                            </Flex>
+
                                                                         </Flex>
-                                                                    </Flex>
+
+                                                                        {flavorsSelected.filter((filter) => filter.id_sabor == sab.id_sabor).length > 0 && (
+                                                                            <Textarea
+                                                                                mb={5}
+                                                                                placeholder='Escreva a observação aqui...'
+                                                                                size={['xs', 'xs']}
+                                                                                border='1px solid #E0E0E0'
+                                                                                borderRadius='36.5px'
+                                                                                padding='11px 25px'
+                                                                                onChange={(e) => {
+                                                                                    setFlavorsSelected((prevFlavors) => {
+                                                                                        return prevFlavors.map((flavor) => {
+                                                                                            if (flavor.id_sabor === sab.id_sabor) {
+                                                                                                return {
+                                                                                                    ...flavor,
+                                                                                                    observacao: e.target.value,
+                                                                                                };
+                                                                                            }
+                                                                                            return flavor;
+                                                                                        });
+                                                                                    });
+                                                                                }}
+                                                                                resize='none'
+                                                                                _focusVisible={{
+                                                                                    borderColor: data?.primary_color,
+                                                                                    boxShadow: `0 0 0 1px ${data?.primary_color}`
+                                                                                }}
+                                                                                rows='1'
+                                                                                maxLength={140}
+                                                                                overflow='hidden'
+                                                                            />
+                                                                        )}
+
+                                                                    </Box>
                                                                 ))}
                                                             </Box>
                                                         </Box>

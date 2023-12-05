@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { HomeStore } from '../components/HomeStore';
 import { HomeEstablishments } from '../components/HomeEstablishments';
 import { isEmpty } from 'lodash';
@@ -6,29 +6,39 @@ import Head from 'next/head';
 import url from 'url';
 
 export default function Home({ data, subdomain }) {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, [data, subdomain]);
+
   return (
     <>
-      {!isEmpty(data) && subdomain && (
-        <Head>
-          <title>{data?.nome}</title>
-          <link rel="shortcut icon" href={data?.logo_home} />
-          <meta property="og:title" content={data?.nome} />
-          <meta property="og:description" content={data?.frase_home || data?.nome} />
-          <meta property="og:image" content={data?.logo_home} />
-          <meta name="description" content={data?.frase_home || data?.nome} />
-          <meta name="twitter:title" content={data?.nome} />
-          <meta name="twitter:description" content={data?.frase_home || data?.nome} />
-          <meta name="twitter:image" content={data?.logo_home} />
-          <meta name="twitter:card" content="summary_large_image" />
-        </Head>
-      )}
+      {!loading && (
+        <>
+          {!isEmpty(data) && subdomain && (
+            <Head>
+              <title>{data?.nome}</title>
+              <link rel="shortcut icon" href={data?.logo_home} />
+              <meta property="og:title" content={data?.nome} />
+              <meta property="og:description" content={data?.frase_home || data?.nome} />
+              <meta property="og:image" content={data?.logo_home} />
+              <meta name="description" content={data?.frase_home || data?.nome} />
+              <meta name="twitter:title" content={data?.nome} />
+              <meta name="twitter:description" content={data?.frase_home || data?.nome} />
+              <meta name="twitter:image" content={data?.logo_home} />
+              <meta name="twitter:card" content="summary_large_image" />
+            </Head>
+          )}
 
-      {subdomain && !isEmpty(data) ? (
-        <HomeStore data={data} subdomain={subdomain} />
-      ) : (
-        <HomeEstablishments />
-      )
-      }
+          {subdomain && !isEmpty(data) ? (
+            <HomeStore data={data} subdomain={subdomain} />
+          ) : (
+            <HomeEstablishments />
+          )
+          }
+        </>
+      )}
     </>
   )
 }

@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { NavbarOrder } from '../../components/NavbarOrder'
 import { Box, Container, Flex, ListItem, Text, UnorderedList } from '@chakra-ui/react'
@@ -9,7 +9,13 @@ import { FormasPgBox } from '../../components/FormasPgBox'
 import url from 'url';
 
 function Sobre({ data, subdomain }) {
-    return (
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setLoading(false);
+    }, [data, subdomain]);
+
+    return !loading && (
         <>
             <Head>
                 <title>Sobre a loja</title>

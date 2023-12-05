@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import Navbar from '../../components/Navbar/Navbar'
 import HeaderHomeStore from '../../components/HeaderHomeStore/HeaderHomeStore'
@@ -12,9 +12,14 @@ import { Box } from '@chakra-ui/react'
 import url from 'url';
 
 function lista({ data, subdomain }) {
+    const [loading, setLoading] = useState(true);
     const [refreshSearch, setRefreshSearch] = useState(true);
 
-    return (
+    useEffect(() => {
+        setLoading(false);
+    }, [data, subdomain]);
+
+    return !loading && (
         <>
             <Head>
                 <title>{data?.nome}</title>

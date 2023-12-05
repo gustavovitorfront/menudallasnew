@@ -19,12 +19,17 @@ const AccountSchema = Yup.object().shape({
         .required('Campo de número é obrigatório.'),
 });
 
-function EditarPerfil({ data, user, view, update }) {
+function EditarPerfil({ data, subdomain, user, view, update }) {
     const [isLoading, setIsLoading] = useState(false);
     const [initialValues, setInitialValues] = useState({});
     const [showMsg, setShowMsg] = useState(false);
+    const [loading, setLoading] = useState(true);
     const router = useRouter();
     const toast = useToast();
+
+    useEffect(() => {
+        setLoading(false);
+    }, [data, subdomain]);
 
     useEffect(() => {
         if (user?.loading == true) {
@@ -66,7 +71,7 @@ function EditarPerfil({ data, user, view, update }) {
         setShowMsg(true)
     }
 
-    return (
+    return !loading && (
         <>
             <Head>
                 <title>Editar perfil</title>

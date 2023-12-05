@@ -1,13 +1,18 @@
 import Head from 'next/head'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavbarOrder } from '../../components/NavbarOrder'
 import { Container } from '@chakra-ui/react'
 import { AvaliacoesContainer } from '../../components/AvaliacoesContainer'
 import url from 'url';
 
 function Avaliacoes({ data, subdomain }) {
+  const [loading, setLoading] = useState(true);
 
-  return (
+  useEffect(() => {
+    setLoading(false);
+  }, [data, subdomain]);
+
+  return !loading && (
     <>
       <Head>
         <title>Histórico de Avaliações</title>

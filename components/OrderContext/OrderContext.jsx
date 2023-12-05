@@ -300,6 +300,8 @@ function OrderContext({ data, subdomain, bairros, getAllBairros, createPedido, c
         if (qtd === 0) {
             if (window.confirm("Deseja remover item do pedido?")) {
                 newBag = bag.filter((_, index) => index !== key);
+            }else{
+                return false;
             }
         } else {
             newBag = bag.map((entry, index) => {

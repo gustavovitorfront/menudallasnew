@@ -11,6 +11,11 @@ import url from 'url';
 function Perfil({ data, subdomain }) {
     const [isLoggedState, setIsLoggedState] = useState(false);
     const [user, setUser] = useState({});
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setLoading(false);
+    }, [data, subdomain]);
 
     useEffect(() => {
         setIsLoggedState(isLogged)
@@ -22,7 +27,7 @@ function Perfil({ data, subdomain }) {
         }
     }, [isLogged, userDataLogged]);
 
-    return (
+    return !loading && (
         <>
             <Head>
                 <title>Perfil</title>

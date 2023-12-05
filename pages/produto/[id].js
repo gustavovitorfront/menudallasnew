@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { ProductContainer } from '../../components/ProductContainer';
 import Head from 'next/head';
 import url from 'url';
 
 function Produto({ data, subdomain }) {
-    return (
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setLoading(false);
+    }, [data, subdomain]);
+
+    return !loading && (
         <>
             <Head>
                 <title>Ver produto</title>

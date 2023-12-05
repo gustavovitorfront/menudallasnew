@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { isLogged } from '../../utils/auth';
 import Head from 'next/head';
 import { NavbarOrder } from '../../components/NavbarOrder';
@@ -8,6 +8,12 @@ import { PedidoContext } from '../../components/PedidoContext';
 import url from 'url';
 
 function Pedidos({ data, subdomain }) {
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setLoading(false);
+    }, [data, subdomain]);
+    
     const router = useRouter();
 
     useEffect(() => {
@@ -16,7 +22,7 @@ function Pedidos({ data, subdomain }) {
         }
     }, [isLogged]);
 
-    return (
+    return !loading && (
         <>
             <Head>
                 <title>Pedidos</title>
