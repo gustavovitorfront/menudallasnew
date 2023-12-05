@@ -521,6 +521,7 @@ function InfoProduct({ subdomain, data, productData, sabores, getAll }) {
                                                                                 border='1px solid #E0E0E0'
                                                                                 borderRadius='36.5px'
                                                                                 padding='11px 25px'
+                                                                                value={flavorsSelected.find((filter) => filter.id_sabor == sab.id_sabor)?.observacao}
                                                                                 onChange={(e) => {
                                                                                     setFlavorsSelected((prevFlavors) => {
                                                                                         return prevFlavors.map((flavor) => {
@@ -592,24 +593,31 @@ function InfoProduct({ subdomain, data, productData, sabores, getAll }) {
                             </Flex>
 
                             {flavorsSelected?.map((sab, index) => (
-                                <Flex key={index} w='100%' border='1px solid #CECECE' padding='16px 25px' alignItems='center' justifyContent='space-between' borderRadius={index + 1 == flavorsSelected.length && '0px 0px 22px 22px'}>
-                                    <Box>
-                                        <Text fontSize='16px' fontWeight={600}>1/{flavorsSelected.length} {sab?.descricao}</Text>
-                                    </Box>
+                                <Box key={index} w='100%' border='1px solid #CECECE' padding='16px 25px'  borderRadius={index + 1 == flavorsSelected.length && '0px 0px 22px 22px'}>
+                                    <Flex alignItems='center' justifyContent='space-between'>
+                                        <Box>
+                                            <Text fontSize='16px' fontWeight={600}>1/{flavorsSelected.length} {sab?.descricao}</Text>
+                                        </Box>
 
-                                    <Box>
-                                        <Switch isChecked onChange={() => {
-                                            if (dt.descricao && !dt.descricao.includes(sab.descricao)) {
-                                                const newFlavorsSelected = flavorsSelected.filter((entry) => entry.id_sabor != sab.id_sabor);
-                                                setFlavorsSelected(newFlavorsSelected)
-                                            }
-                                        }} size={['md', 'lg']} css={{
-                                            '.chakra-switch__track[data-checked]': {
-                                                '--switch-bg': data?.primary_color
-                                            }
-                                        }} />
-                                    </Box>
-                                </Flex>
+                                        <Box>
+                                            <Switch isChecked onChange={() => {
+                                                if (dt.descricao && !dt.descricao.includes(sab.descricao)) {
+                                                    const newFlavorsSelected = flavorsSelected.filter((entry) => entry.id_sabor != sab.id_sabor);
+                                                    setFlavorsSelected(newFlavorsSelected)
+                                                }
+                                            }} size={['md', 'lg']} css={{
+                                                '.chakra-switch__track[data-checked]': {
+                                                    '--switch-bg': data?.primary_color
+                                                }
+                                            }} />
+                                        </Box>
+                                    </Flex>
+
+                                    {sab?.observacao && (
+                                        <Text fontSize='xs' fontStyle='italic'><Text as='strong'>Observação: </Text>{sab?.observacao}</Text>
+                                    )}
+                                    
+                                </Box>
                             ))}
                         </Box>
                     ) : ""}

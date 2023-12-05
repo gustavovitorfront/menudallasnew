@@ -53,7 +53,7 @@ function MenuOptionsStore({ data, categories, products, getAll, subdomain }) {
     useEffect(() => {
         setTimeout(() => {
             internalSlider.current?.update(options);
-        }, 500)
+        }, 100)
     }, [internalSlider, options])
 
 
