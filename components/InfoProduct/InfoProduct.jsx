@@ -353,7 +353,7 @@ function InfoProduct({ subdomain, data, productData, sabores, getAll }) {
                                 {dt?.detalhe}
                             </Text>
 
-                            <Text mt='12px' fontSize={['18px', '24px']} color='#000' fontWeight={400} display='flex' alignItems='center' gap='8px' justifyContent={['center', 'auto']}>
+                            <Text mt='12px' fontSize={['18px', '24px']} color='#000' fontWeight={400} display='flex' alignItems='center' gap='8px' justifyContent={['center', 'normal']}>
                                 {dt.tamanhos && <Text as='span'>De: </Text>}
 
                                 {["P", "O"].indexOf(dt.tipo) > -1 &&

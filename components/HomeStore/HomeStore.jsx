@@ -10,8 +10,6 @@ function HomeStore({ data, subdomain }) {
     return (
         <>
             <Head>
-                <title>{data?.nome}</title>
-                <link rel="shortcut icon" href={data?.logo_home} />
                 <style>
                     {`
                         body {

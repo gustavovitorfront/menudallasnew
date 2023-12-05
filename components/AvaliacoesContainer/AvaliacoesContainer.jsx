@@ -23,6 +23,11 @@ export const handleTotalStar = (avaliacoesData) => {
 function AvaliacoesContainer({ data, subdomain, avaliacoes, getAll, create }) {
     const [avaliacoesData, setAvaliacoesData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     useEffect(() => {
         setAvaliacoesData([]);
@@ -61,8 +66,6 @@ function AvaliacoesContainer({ data, subdomain, avaliacoes, getAll, create }) {
     const renderStars = (mediaEstrelas) => {
         const stars = [];
 
-        console.log(mediaEstrelas)
-
         for (let i = 1; i <= 5; i++) {
             const starValue = i - 0.5; // Valor da estrela considerando meias estrelas
             const isStarFull = starValue <= mediaEstrelas;
@@ -95,7 +98,7 @@ function AvaliacoesContainer({ data, subdomain, avaliacoes, getAll, create }) {
                 </Text>
             </Flex>
 
-            {isLogged && (
+            {isLogged && isMounted && typeof window !== 'undefined' && (
                 <Box w='100%'>
                     {avaliacoesData.filter((entry) => entry.id_user == userDataLogged?.id).length == 0 && (
                         <>

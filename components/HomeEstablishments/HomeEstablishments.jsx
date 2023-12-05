@@ -7,10 +7,23 @@ import MainCategories from '../MainCategories/MainCategories'
 import EstablishmentsList from '../EstablishmentsList/EstablishmentsList'
 import InfosFooter from '../InfosFooter/InfosFooter'
 import FooterHome from '../FooterHome/FooterHome'
+import Head from 'next/head'
 
 function HomeEstablishments() {
     return (
         <Box pt='88px'>
+            <Head>
+                <title>MenuDallas</title>
+                <link rel="shortcut icon" href='img/logo192.png' />
+                <style>
+                    {`
+                        body {
+                            background: white !important;
+                        }
+                    `}
+                </style>
+            </Head>
+
             <Navbar />
             <HeaderHome />
 

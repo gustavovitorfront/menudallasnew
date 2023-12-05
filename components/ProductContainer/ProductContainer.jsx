@@ -54,7 +54,6 @@ function ProductContainer({ data, productDetail, subdomain, getAll }) {
         <>
             <Head>
                 <title>{productData[0]?.descricao}</title>
-                <link rel="shortcut icon" href={data?.logo_home} />
             </Head>
             <NavbarProduct productData={productData} />
             <InfoProduct subdomain={subdomain} productData={productData} data={data} />
