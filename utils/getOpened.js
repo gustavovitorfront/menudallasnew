@@ -1,6 +1,10 @@
 import { format, parse } from 'date-fns'
 
 export const getOpened = (dt) => {
+    if(dt.aberto){
+        return true;
+    }
+
     const day = format(new Date(), "i");
     const now = new Date();
     const openingTime = parse(dt.hora_abre, "HH:mm", new Date());

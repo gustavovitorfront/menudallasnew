@@ -12,7 +12,7 @@ function FormasPgBox({ data, subdomain, getAll, formasPg }) {
         if (isEmpty(formasPg)) {
             setFormasPgData([]);
             setIsLoading(false)
-            getAll(subdomain);
+            getAll(data.user_id);
         }
     }, []);
 

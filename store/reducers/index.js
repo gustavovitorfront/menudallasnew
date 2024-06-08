@@ -12,6 +12,11 @@ import { bairros } from './bairros.reducer';
 import { pedido } from './pedido.reducer';
 import { pedidoUser } from './pedidoUser.reducer';
 import { avaliacoes } from './avaliacoes.reducer';
+import { coupons } from './coupons.reducer';
+import { couponsValidar } from './couponsValidar.reducer';
+import { banners } from './banners.reducer';
+import { lojas } from './lojas.reducer';
+import { segmentos } from './segmentos.reducer';
 
 const rootReducer = combineReducers({
   home,
@@ -26,7 +31,12 @@ const rootReducer = combineReducers({
   bairros,
   pedido,
   pedidoUser,
-  avaliacoes
+  avaliacoes,
+  coupons,
+  couponsValidar,
+  banners,
+  lojas,
+  segmentos
 });
 
 export default rootReducer;

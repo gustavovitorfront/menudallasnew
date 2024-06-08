@@ -5,12 +5,12 @@ export const categoriesActions = {
     getAll,
 };
 
-function getAll(subdomain) {
+function getAll(userId) {
 
     return dispatch => {
         dispatch(request());
 
-        categoriesService.getAll({ subdomain })
+        categoriesService.getAll({ userId })
             .then(
                 data => dispatch(success(data)),
                 error => dispatch(failure(error.toString()))

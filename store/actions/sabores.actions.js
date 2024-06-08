@@ -5,12 +5,12 @@ export const saboresActions = {
     getAll,
 };
 
-function getAll(subdomain, tamanho, idgrupoproduto) {
+function getAll(userId, tamanho, idgrupoproduto) {
 
     return dispatch => {
         dispatch(request());
 
-        saboresService.getAll({ subdomain, tamanho, idgrupoproduto })
+        saboresService.getAll({ userId, tamanho, idgrupoproduto })
             .then(
                 data => dispatch(success(data)),
                 error => dispatch(failure(error.toString()))

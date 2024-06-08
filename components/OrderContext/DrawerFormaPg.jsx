@@ -18,7 +18,7 @@ function DrawerFormaPg({ setOpenFormaPg, openFormaPg, formasPg, subdomain, getAl
         if (isEmpty(formasPg) && openFormaPg) {
             setFormasPgData([]);
             setIsLoading(false)
-            getAllFormasPg(subdomain);
+            getAllFormasPg(data.user_id);
         }
     }, [openFormaPg]);
 

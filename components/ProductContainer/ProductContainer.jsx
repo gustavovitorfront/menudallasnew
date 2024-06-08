@@ -19,7 +19,7 @@ function ProductContainer({ data, productDetail, subdomain, getAll }) {
         if (g && p) {
             setProductData([]);
             setIsLoading(false)
-            getAll(subdomain, g, p);
+            getAll(data.user_id, g, p);
         }
     }, [g, p]);
 

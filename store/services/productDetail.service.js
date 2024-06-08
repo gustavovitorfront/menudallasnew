@@ -1,19 +1,27 @@
 import api from "../../api";
 
 export const productDetailService = {
-    getAll
+  getAll,
 };
 
 function getAll(params) {
-    return api.get('/detalheproduto?empresa=' + params.subdomain + '&id_grupo=' + params.id_grupo + '&id_produto=' + params.id_produto).then(handleResponse);
+  return api
+    .get(
+      params.userId +
+        "/produtos?idgrupo=" +
+        params.id_grupo +
+        "&idproduto=" +
+        params.id_produto
+    )
+    .then(handleResponse);
 }
 
 function handleResponse(response) {
-    const data = response.data;
-    if (!data || data.length === 0) {
-        const error = (data && data.message) || response.statusText;
-        return Promise.reject(error);
-    }
+  const data = response.data;
+  if (!data || data.length === 0) {
+    const error = (data && data.message) || response.statusText;
+    return Promise.reject(error);
+  }
 
-    return data;
+  return data;
 }

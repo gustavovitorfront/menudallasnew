@@ -20,7 +20,7 @@ function MainProducts({ data, products, getAll, subdomain, refreshSearch, setRef
         if (refreshSearch) {
             setProductsData([]);
             setIsLoading(false)
-            getAll(subdomain);
+            getAll(data.user_id);
             setRefreshSearch(false);
         }
     }, [refreshSearch]);
@@ -113,11 +113,11 @@ function MainProducts({ data, products, getAll, subdomain, refreshSearch, setRef
 
                                 {["P", "O"].indexOf(product.tipo) > -1 &&
                                     <Text as='span' color='rgb(80, 167, 115)' display='flex' alignItems='center' gap='4px'>
-                                        {moneyFormat.format(filterPromotionTamanhoArrayMenor(product))} <Text color='rgb(113, 113, 113)'>até: </Text>
-                                        {moneyFormat.format(filterPromotionTamanhoArrayMaior(product))}
+                                        {moneyFormat.format(product.valor_de || 0)} <Text color='rgb(113, 113, 113)'>até: </Text>
+                                        {moneyFormat.format(product.valor_ate || 0)}
                                     </Text>}
-                                <Text as='span' color='rgb(80, 167, 115)'>{["P", "O"].indexOf(product.tipo) === -1 && (product?.em_promocao == false ? moneyFormat.format(product?.valor) : moneyFormat.format(product?.valor_promocao))}</Text>
-                                {["P", "O"].indexOf(product.tipo) === -1 && product?.em_promocao == true ? (<Text textDecoration='line-through' color='rgb(113, 113, 113)'>{product?.em_promocao == true && moneyFormat.format(product?.valor)}</Text>) : ''}
+                                <Text as='span' color='rgb(80, 167, 115)'>{["P", "O"].indexOf(product.tipo) === -1 && (product?.em_promocao == false ? moneyFormat.format(product?.valor || 0) : moneyFormat.format(product?.valor_Promocao || 0))}</Text>
+                                {["P", "O"].indexOf(product.tipo) === -1 && product?.em_promocao == true ? (<Text textDecoration='line-through' color='rgb(113, 113, 113)'>{product?.em_promocao == true && moneyFormat.format(product?.valor || 0)}</Text>) : ''}
                             </Text>
                         </Box>
                     </Box>

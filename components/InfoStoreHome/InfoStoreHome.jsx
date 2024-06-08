@@ -18,7 +18,7 @@ function InfoStoreHome({ data = {}, type = 1, subdomain }) {
     return (
         <Box borderRadius='44px 44px 0px 0px' bg='white' borderTop='4px solid #F5F5F5' mt='-3rem' h={type === 1 ? ['100%', '100%'] : ['initial', '340px']} pb={['20px', '']} paddingLeft='5%' paddingRight='5%'>
             <Box borderRadius='83.5px' bg={data?.primary_color} boxShadow='0px 4px 4px 0px rgba(0, 0, 0, 0.25)' w='130px' h='130px' overflow='hidden' display='flex' alignItems='center'
-                justifyContent='center' m='0px auto' position='relative' top='-3rem' mb='17px' bgImage={`url("${data.logo_home}")`} backgroundSize='contain' backgroundPosition='center' bgRepeat='no-repeat'>
+                justifyContent='center' m='0px auto' position='relative' top='-3rem' mb='17px' bgImage={`url("${data.logo_home ? data.logo_home : 'https://imgmenudallas.s3.sa-east-1.amazonaws.com/noimage.png'}")`} backgroundSize='contain' backgroundPosition='center' bgRepeat='no-repeat'>
             </Box>
 
             <Box mt='-3.5rem'>

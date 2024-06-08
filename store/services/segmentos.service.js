@@ -1,19 +1,11 @@
 import api from "../../api";
 
-export const saboresService = {
+export const segmentosService = {
   getAll,
 };
 
-function getAll(params) {
-  return api
-    .get(
-      params.userId +
-        "/produtos/sabores?tamanho=" +
-        params.tamanho +
-        "&idgrupoproduto=" +
-        params.idgrupoproduto
-    )
-    .then(handleResponse);
+function getAll() {
+  return api.get("home/categoria").then(handleResponse);
 }
 
 function handleResponse(response) {

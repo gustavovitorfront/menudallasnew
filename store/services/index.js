@@ -11,3 +11,7 @@ export * from './bairros.service';
 export * from './pedido.service';
 export * from './pedidoUser.service';
 export * from './avaliacoes.service';
+export * from './coupons.service';
+export * from './banners.service';
+export * from './lojas.service';
+export * from './segmentos.service';

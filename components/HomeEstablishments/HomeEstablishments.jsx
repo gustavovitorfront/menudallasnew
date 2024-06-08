@@ -1,5 +1,5 @@
 import { Box, Container } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import Navbar from '../Navbar/Navbar'
 import HeaderHome from '../HeaderHome/HeaderHome'
 import MainBanners from '../MainBanners/MainBanners'
@@ -10,6 +10,9 @@ import FooterHome from '../FooterHome/FooterHome'
 import Head from 'next/head'
 
 function HomeEstablishments() {
+    const [segmentoActive, setSegmentoActive] = useState('');
+    const [locActive, setLocActive] = useState({});
+
     return (
         <Box pt='88px'>
             <Head>
@@ -25,12 +28,12 @@ function HomeEstablishments() {
             </Head>
 
             <Navbar />
-            <HeaderHome />
+            <HeaderHome setLocActive={setLocActive} />
 
             <Container maxW='100%' pl={['30px', '50px']} pr={['30px', '50px']} mt={['30px', '40px']}>
                 <MainBanners />
-                <MainCategories />
-                <EstablishmentsList />
+                <MainCategories setSegmentoActive={setSegmentoActive} />
+                <EstablishmentsList segmentoActive={segmentoActive} locActive={locActive} setSegmentoActive={setSegmentoActive} />
             </Container>
 
             <InfosFooter />

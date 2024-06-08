@@ -5,12 +5,12 @@ export const formasPgActions = {
     getAll,
 };
 
-function getAll(subdomain) {
+function getAll(userId) {
 
     return dispatch => {
         dispatch(request());
 
-        formasPgService.getAll({ subdomain })
+        formasPgService.getAll({ userId })
             .then(
                 data => dispatch(success(data)),
                 error => dispatch(failure(error.toString()))

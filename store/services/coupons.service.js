@@ -1,17 +1,22 @@
 import api from "../../api";
 
-export const saboresService = {
+export const couponsService = {
   getAll,
+  validarCupom,
 };
 
 function getAll(params) {
+  return api.get(params.userId + "/cupomdesconto").then(handleResponse);
+}
+
+function validarCupom(params) {
   return api
     .get(
       params.userId +
-        "/produtos/sabores?tamanho=" +
-        params.tamanho +
-        "&idgrupoproduto=" +
-        params.idgrupoproduto
+        "/validacupom/?cupom=" +
+        params.cupom +
+        "&valorcompra=" +
+        params.valorcompra
     )
     .then(handleResponse);
 }

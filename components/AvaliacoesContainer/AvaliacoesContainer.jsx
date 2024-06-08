@@ -111,12 +111,6 @@ function AvaliacoesContainer({ data, subdomain, avaliacoes, getAll, create }) {
                                         initialErrors={{}}
                                         initialValues={{}}
                                         onSubmit={(values) => {
-                                            console.debug('values', {
-                                                ...values,
-                                                id_user: userDataLogged?.id,
-                                                empresa: subdomain,
-                                                nome: userDataLogged?.nome,
-                                            })
                                             create({
                                                 ...values,
                                                 id_user: userDataLogged?.id,

@@ -1,18 +1,25 @@
 import api from "../../api";
 
-export const saboresService = {
+export const lojasService = {
   getAll,
 };
 
+function toQueryString(params) {
+  console.debug('params', params)
+
+  if(!params){
+    return;
+  }
+  return Object.keys(params)
+    .map(
+      (key) => encodeURIComponent(key) + "=" + encodeURIComponent(params[key])
+    )
+    .join("&");
+}
+
 function getAll(params) {
   return api
-    .get(
-      params.userId +
-        "/produtos/sabores?tamanho=" +
-        params.tamanho +
-        "&idgrupoproduto=" +
-        params.idgrupoproduto
-    )
+    .get(`home/segmento?${toQueryString(params)}`)
     .then(handleResponse);
 }
 

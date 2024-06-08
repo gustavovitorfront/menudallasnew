@@ -5,12 +5,12 @@ export const bairrosActions = {
     getAll,
 };
 
-function getAll(subdomain) {
+function getAll(userId) {
 
     return dispatch => {
         dispatch(request());
 
-        bairrosService.getAll({ subdomain })
+        bairrosService.getAll({ userId })
             .then(
                 data => dispatch(success(data)),
                 error => dispatch(failure(error.toString()))

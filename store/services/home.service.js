@@ -5,7 +5,7 @@ export const homeService = {
 };
 
 function getAll(params) {
-    return api.get('/home?empresa='+params.subdomain).then(handleResponse);
+    return api.get('/home/'+params.subdomain).then(handleResponse);
 }
 
 function handleResponse(response) {

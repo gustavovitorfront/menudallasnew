@@ -11,3 +11,7 @@ export * from './bairros.constants';
 export * from './pedido.constants';
 export * from './pedidoUser.constants';
 export * from './avaliacoes.constants';
+export * from './coupons.constants';
+export * from './banners.constants';
+export * from './lojas.constants';
+export * from './segmentos.constants';
