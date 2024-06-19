@@ -55,6 +55,7 @@ export async function getServerSideProps(context) {
     context.req.headers["x-forwarded-host"] || context.req.headers.host;
   const subdomain = url.parse(`https://${host}`).hostname.split(".")[0];
 
+  console.debug('url.parse(`https://${host}`).hostname', url.parse(`https://${host}`).hostname);
   console.debug("subdomain", subdomain);
 
   if (subdomain != process.env.NEXT_PUBLIC_BASE_URL_NAME_BASE_DOMAIN) {
