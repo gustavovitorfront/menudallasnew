@@ -51,16 +51,22 @@ export default function Home({ data, subdomain }) {
 }
 
 export async function getServerSideProps(context) {
-  const host =
-    context.req.headers["x-forwarded-host"] || context.req.headers.host;
+  const { req } = context;
 
-  // Parse the host using the URL constructor
-  const parsedUrl = new URL(`https://${host}`);
+  // Obtenha o protocolo, host e URL do cliente
+  const protocol = req.headers["x-forwarded-proto"] || "http";
+  const host = req.headers["x-forwarded-host"] || req.headers.host;
+  const originalUrl = req.url;
+
+  // Monte a URL completa do cliente
+  const fullUrl = `${protocol}://${host}${originalUrl}`;
+
+  // Extraia o subdomínio da URL
+  const parsedUrl = new URL(fullUrl);
   const hostname = parsedUrl.hostname;
-
-  // Extract the subdomain
   const subdomain = hostname.split(".")[0];
 
+  console.debug("fullUrl", fullUrl);
   console.debug("parsedUrl.hostname", hostname);
   console.debug("subdomain", subdomain);
 
